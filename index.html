@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <h2>The JavaScript <i>this</i> Keyword</h2>
+
+    <p id="demo"></p>
+
+    <script>
+        var input = [
+            {
+                "id": 1,
+                "title": "Title 1",
+                "childrens": [
+                    {
+                        "id": 2,
+                        "title": "Title 2",
+                        "childrens": []
+                    }
+                ]
+            },
+            {
+                "id": 3,
+                "title": "Title 3",
+                "childrens": [
+                    {
+                        "id": 4,
+                        "title": "Title 4",
+                        "childrens": [
+                            {
+                                "id": 5,
+                                "title": "Title 5",
+                                "childrens": []
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        var result = [];
+        function a(input2) {
+            if (input2.childrens.length > 0) {
+                let t = b(input2)
+                result.push({ id: t.id, title: t.title, childrens: [] });
+                a(input2.childrens[0])
+            }
+        }
+        function b(obj) {
+            return obj.childrens[0];
+        }
+        function c(input1) {
+            for (i = 0; i < input1.length; i++) {
+                result.push({ id: input1[i].id, title: input1[i].title, childrens: [] });
+                a(input1[i])
+            }
+            return result;
+        }
+        
+        document.getElementById("demo").innerHTML = JSON.stringify(c(input));
+    </script>
+
+</body>
+
+</html>
